@@ -7,3 +7,16 @@
 @media(max-width:420px){.hero h1{font-size:46px}.chapter-grid{grid-template-columns:1fr}.chapter-card{min-height:0;padding:22px}.chapter-card h3{margin:13px 0 10px}.chapter-card .card-foot{padding-top:16px}.lab-grid{grid-template-columns:1fr}.lab-card .lab-preview{height:145px}.hero-art{min-height:205px}.lab-controls{gap:0 15px;padding:20px}.lab-output{padding:18px}.metric strong{font-size:20px}.metric span{font-size:10px}.metric{padding:12px 10px}.metrics{grid-template-columns:repeat(3,minmax(0,1fr))}.budget-items{gap:10px}.read-next{grid-template-columns:1fr}.section-heading{gap:12px}.section-heading h2{font-size:24px}.balance-grid{gap:8px}.balance-column{padding:10px}.balance-row{font-size:11px}.control label{display:block}.control output{display:block;width:max-content;margin-top:6px}.main-nav{gap:8px}.main-nav a{font-size:11px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
 @media print{.site-header,.site-footer,.topic-sidebar,.button-row,.search-trigger,.read-next,.try-link,.thought,.lab-controls,dialog{display:none!important}body{background:white;color:black;font-size:11pt}.wrap{max-width:none;padding:0}.topic-layout,.lab-workspace{display:block;padding:0;border:0}.lesson-article{max-width:none}.lesson-article h1{font-size:24pt}.key-insight,.lesson-visual,.table-scroll,.lab-output{break-inside:avoid}.lab-output{padding:0}.page-intro{padding:0 0 20px}.chart{max-height:280px}.source-line::after{content:' | 경제의 원리 웹 학습실'}.lab-assumption{display:block}}
+
+/* Final chart and small-screen readability pass. */
+.chart .axis,.chart .grid{fill:none}
+.chart-line text{font-size:14px}
+.chart-bars text{font-size:18px}
+.lesson-visual{overflow-x:auto}
+@media(max-width:760px){
+ .chart-line text{font-size:18px}
+ .chart-bars text{font-size:24px}
+ .lesson-visual svg{min-width:450px}
+ .metrics{min-width:0}
+ .hero-art img{image-rendering:auto}
+}

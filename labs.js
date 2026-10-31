@@ -40,7 +40,7 @@ function legend(rows){return '<div class="legend">'+rows.map(([name,cls=''])=>`<
 let chartId=0;
 function lineChart({series,xMax=10,yMax=100,yMin=0,xLabel='수량',yLabel='가격',dots=[],hLines=[],description=''}){
  const w=620,h=325,L=64,R=28,T=27,B=51,pw=w-L-R,ph=h-T-B,id='plot-'+(++chartId),x=v=>L+v/xMax*pw,y=v=>T+(yMax-v)/(yMax-yMin)*ph;
- let s=`<svg class="chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(description||yLabel+'과 '+xLabel+'의 관계')}"><title>${esc(description||yLabel+'과 '+xLabel+'의 관계')}</title><defs><clipPath id="${id}"><rect x="${L}" y="${T}" width="${pw}" height="${ph}"/></clipPath></defs>`;
+ let s=`<svg class="chart chart-line" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(description||yLabel+'과 '+xLabel+'의 관계')}"><title>${esc(description||yLabel+'과 '+xLabel+'의 관계')}</title><defs><clipPath id="${id}"><rect x="${L}" y="${T}" width="${pw}" height="${ph}"/></clipPath></defs>`;
  for(let i=0;i<=4;i++){const yy=yMin+(yMax-yMin)*i/4,xx=xMax*i/4;s+=`<path class="grid" d="M${L} ${y(yy)}H${w-R}"/><text x="${L-10}" y="${y(yy)+4}" text-anchor="end">${fmt(yy,1)}</text><text x="${x(xx)}" y="${h-B+23}" text-anchor="middle">${fmt(xx,1)}</text>`;}
  s+=`<path class="axis" d="M${L} ${T}V${h-B}H${w-R}"/><text x="${L}" y="15">${esc(yLabel)}</text><text x="${w-R}" y="${h-7}" text-anchor="end">${esc(xLabel)}</text><g clip-path="url(#${id})">`;
  if(yMin<0)s+=`<path class="axis" d="M${L} ${y(0)}H${w-R}"/>`;
@@ -51,8 +51,8 @@ function lineChart({series,xMax=10,yMax=100,yMin=0,xLabel='수량',yLabel='가�
  return s+'</svg>';
 }
 function bars(rows,{unit='',caption='수치 비교',max=null}={}){
- const absMax=max||Math.max(1,...rows.map(r=>Math.abs(r[1]))),x0=180,width=370,rowH=54;
- return `<svg class="chart" viewBox="0 0 620 ${rows.length*rowH+35}" role="img" aria-label="${esc(caption)}"><title>${esc(caption)}</title>`+rows.map(([name,val,grey],i)=>{const yy=18+i*rowH,len=Math.abs(val)/absMax*width;return`<text x="0" y="${yy+21}">${esc(name)}</text><rect x="${x0}" y="${yy}" width="${len}" height="32" fill="${grey?'#aaa99f':'#20211f'}"/><text x="${x0+len+8}" y="${yy+21}">${esc((val<0?'−':'')+fmt(Math.abs(val),1))}${esc(unit)}</text>`;}).join('')+'</svg>';
+ const negative=rows.some(r=>r[1]<0),absMax=max||Math.max(1,...rows.map(r=>Math.abs(r[1]))),left=20,right=660,zero=negative?340:left,scale=(negative?320:640)/absMax,rowH=78,height=rows.length*rowH+10;
+ return `<svg class="chart chart-bars" viewBox="0 0 680 ${height}" role="img" aria-label="${esc(caption)}"><title>${esc(caption)}</title>`+rows.map(([name,val,grey],i)=>{const yy=8+i*rowH,len=Math.abs(val)*scale,start=val<0?zero-len:zero;return `<text x="${left}" y="${yy+20}">${esc(name)}</text><text x="${right}" y="${yy+20}" text-anchor="end">${esc(fmt(val,2))}${esc(unit)}</text><rect x="${start}" y="${yy+33}" width="${len}" height="26" fill="${grey?'#aaa99f':'#20211f'}"/><path d="M${zero} ${yy+29}v34" stroke="#76776e" fill="none"/>`;}).join('')+'</svg>';
 }
 function message(text){return `<div class="result-message" role="status">${text}</div>`;}
 const breadIcon='<svg viewBox="0 0 80 55" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M10 42V28c0-16 13-23 30-23s30 7 30 23v14c0 7-60 7-60 0Z"/><path d="M24 14l-3 13m18-17-2 14m18-11-2 13M12 39h56"/></svg>';
