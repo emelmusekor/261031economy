@@ -1,0 +1,49 @@
+name: Verify published website
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/live-check.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check-live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify HTTPS and exact deployed files
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          import pathlib
+          import time
+          import urllib.request
+          base = 'https://emelmusekor.github.io/261031economy/'
+          files = ['index.html', 'styles.css', 'app.js', 'labs.js', 'content/part-1.js', 'content/part-2.js', 'content/part-3.js', 'content/catalogue.js', 'assets/bakery.webp', 'assets/favicon.svg']
+          report = []
+          for name in files:
+              expected = pathlib.Path(name).read_bytes()
+              for attempt in range(6):
+                  try:
+                      with urllib.request.urlopen(base + name, timeout=25) as response:
+                          actual = response.read()
+                          assert response.status == 200
+                      assert actual == expected, 'Published bytes differ from source'
+                      line = 'PASS HTTPS 200 /' + name + ' sha256=' + hashlib.sha256(actual).hexdigest()
+                      print(line, flush=True)
+                      report.append(line)
+                      break
+                  except Exception as error:
+                      if attempt == 5:
+                          raise
+                      print('Retry', name, str(error), flush=True)
+                      time.sleep(8)
+          pathlib.Path('live-verification.txt').write_text('\n'.join(report) + '\n')
+          print('PASS: all 10 public assets match the tested repository source over HTTPS.')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: live-verification
+          path: live-verification.txt
+          retention-days: 7
