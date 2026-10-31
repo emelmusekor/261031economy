@@ -1,0 +1,39 @@
+name: Verify learning website
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: verify-economics-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check JavaScript syntax
+        run: |
+          node --check app.js
+          node --check labs.js
+          for file in content/*.js; do node --check "$file"; done
+      - name: Check source coverage and numerical examples
+        run: node scripts/verify.cjs | tee verification.txt
+      - name: Bundle source for review
+        if: always()
+        run: |
+          mkdir -p review/site
+          cp index.html styles.css app.js labs.js README.md review/site/
+          cp -r content scripts review/site/
+          if [ -d assets ]; then cp -r assets review/site/; fi
+          if [ -f verification.txt ]; then cp verification.txt review/; fi
+          printf '%s\n' '${{ github.sha }}' > review/commit.txt
+      - name: Upload exact-source review bundle
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: economy-site-review
+          path: review/
+          retention-days: 7
