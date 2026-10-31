@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#f7f6f2">
-  <meta name="description" content="생활 속 질문으로 읽고, 숫자를 움직이며 이해하는 경제의 원리. 선택부터 시장·기업·금융·세계경제까지, 기록 없이 자유롭게 공부하는 경제 학습실.">
+  <meta name="description" content="일상에서 만나는 경제의 선택과 가격, 생산, 금융, 세계경제를 읽고 직접 실험해 보세요.">
   <meta property="og:title" content="경제의 원리 · 웹 학습실">
   <meta property="og:description" content="선택 하나, 가격 하나. 그 안에 숨어 있는 경제를 직접 움직여 보세요.">
   <meta property="og:type" content="website">
@@ -29,12 +29,15 @@
         <a href="#/dictionary" data-nav="dictionary">개념 찾기</a>
         <a href="#/resources" data-nav="resources">자료실</a>
       </nav>
+      <div class="view-switch" role="group" aria-label="화면 모드 선택">
+        <button type="button" data-view-mode="desktop" aria-pressed="true">데스크톱</button>
+        <button type="button" data-view-mode="mobile" aria-pressed="false">모바일</button>
+      </div>
       <button class="search-trigger" data-action="search" aria-haspopup="dialog"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg><span>검색</span><kbd>/</kbd></button>
     </div>
   </header>
   <main id="main" tabindex="-1"></main>
-  <footer class="site-footer"><div class="footer-inner"><a class="footer-brand" href="#/">경제의 원리<span>읽고, 움직이고, 이해하기.</span></a><div><p>회원가입 · 학습기록 저장 · 광고 · 분석용 추적 스크립트 없음</p><p>실험의 수치와 모형은 학습용 가정입니다. 실제 통계·전망·투자 권유와 구분합니다.</p><a href="#/resources">원본 교재와 참고 자료</a><span class="footer-dot">·</span><a href="https://github.com/emelmusekor/261031economy" target="_blank" rel="noopener noreferrer">소스 코드 ↗</a></div></div></footer>
   <dialog id="search-dialog" aria-labelledby="search-title"><form method="dialog" class="search-top"><h2 id="search-title">궁금한 경제, 찾아보기</h2><button class="icon-button" aria-label="검색 닫기">×</button></form><label class="sr-only" for="global-search">개념, 질문 또는 교재 쪽수 검색</label><input id="global-search" type="search" placeholder="예: 기회비용, 금리, GDP, 120" autocomplete="off"><p class="search-hint">개념 이름, 생활 속 질문, 교재 쪽수로 찾을 수 있습니다.</p><div id="search-results" class="search-results" aria-live="polite"></div></dialog>
-  <noscript><section class="noscript"><h1>경제의 원리</h1><p>개념 검색과 조작형 실험을 사용하려면 브라우저에서 JavaScript를 허용해 주세요. 회원가입이나 별도 프로그램 설치는 필요하지 않습니다.</p><a href="https://github.com/emelmusekor/261031economy">교재 기반 학습 자료 보기</a></section></noscript>
+  <noscript><section class="noscript"><h1>경제의 원리</h1><p>개념 검색과 조작형 실험을 사용하려면 JavaScript를 허용해 주세요.</p><a href="https://github.com/emelmusekor/261031economy">교재 기반 학습 자료 보기</a></section></noscript>
 </body>
 </html>

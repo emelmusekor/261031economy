@@ -20,3 +20,76 @@
  .metrics{min-width:0}
  .hero-art img{image-rendering:auto}
 }
+
+
+/* Dedicated reading layouts. Mobile preview is available on wide screens.
+   On phones the compact view is always selected by responsive CSS. */
+.view-switch{display:inline-flex;flex-shrink:0;gap:2px;border:1px solid var(--line);padding:2px;align-items:center}
+.view-switch button{font-size:11px;font-weight:700;white-space:nowrap;min-height:33px;padding:6px 10px}
+.view-switch button:hover{background:var(--wash)}
+.view-switch button[aria-pressed=true],.view-switch button[aria-pressed=true]:hover{background:var(--ink);color:var(--paper)}
+.hero + .section{border-top:1px solid var(--ink)}
+@media(min-width:761px){
+html[data-view-mode=mobile] body{background:#e9e8e2}
+html[data-view-mode=mobile] #main{max-width:480px;margin:20px auto 44px;background:var(--paper);border:1px solid var(--line);box-shadow:0 14px 48px #00000010}
+html[data-view-mode=mobile] #main .wrap{max-width:480px;padding:0 20px}
+html[data-view-mode=mobile] .header-inner{max-width:480px;min-height:0;padding:12px 15px 0;gap:9px;flex-wrap:wrap}
+html[data-view-mode=mobile] .brand{font-size:17px;gap:8px}
+html[data-view-mode=mobile] .brand-mark{font-size:32px;width:33px}
+html[data-view-mode=mobile] .brand small{font-size:9px}
+html[data-view-mode=mobile] .view-switch{margin-left:auto}
+html[data-view-mode=mobile] .view-switch button{font-size:10px;padding:4px 7px;min-height:30px}
+html[data-view-mode=mobile] .search-trigger{padding:6px 0;border:0}
+html[data-view-mode=mobile] .search-trigger span,html[data-view-mode=mobile] .search-trigger kbd{display:none}
+html[data-view-mode=mobile] .main-nav{order:4;flex-basis:100%;margin:0;padding:2px 0;gap:8px;border-top:1px solid var(--line);justify-content:space-between}
+html[data-view-mode=mobile] .main-nav a{font-size:11px;padding:9px 0}
+html[data-view-mode=mobile] .hero{grid-template-columns:1fr;gap:10px;padding:37px 0 30px}
+html[data-view-mode=mobile] .hero h1{font-size:44px;margin:15px 0}
+html[data-view-mode=mobile] .hero .intro{font-size:14px}
+html[data-view-mode=mobile] .hero-art{min-height:210px;margin-top:12px}
+html[data-view-mode=mobile] .hero-stamp{width:70px;height:70px;font-size:10px;right:0;top:0}
+html[data-view-mode=mobile] .hero-stamp strong{font-size:20px}
+html[data-view-mode=mobile] .section{padding:39px 0}
+html[data-view-mode=mobile] .section-heading{align-items:flex-start;flex-wrap:wrap}
+html[data-view-mode=mobile] .section-heading h2{font-size:25px}
+html[data-view-mode=mobile] .chapter-grid,html[data-view-mode=mobile] .lab-grid,html[data-view-mode=mobile] .dictionary-list,html[data-view-mode=mobile] .resource-grid{grid-template-columns:1fr}
+html[data-view-mode=mobile] .chapter-card{min-height:0;padding:20px}
+html[data-view-mode=mobile] .chapter-card h3{font-size:20px;margin:14px 0 10px}
+html[data-view-mode=mobile] .experiment-feature{grid-template-columns:1fr}
+html[data-view-mode=mobile] .feature-copy{padding:25px}
+html[data-view-mode=mobile] .feature-copy h2{font-size:26px}
+html[data-view-mode=mobile] .feature-visual{border-left:0;border-top:1px solid var(--line);padding:20px}
+html[data-view-mode=mobile] .page-intro{padding:30px 0 24px}
+html[data-view-mode=mobile] .page-intro h1{font-size:33px}
+html[data-view-mode=mobile] .page-intro p{font-size:14px}
+html[data-view-mode=mobile] .topic-layout{display:block;padding:25px 0 43px}
+html[data-view-mode=mobile] .topic-sidebar{position:relative;top:auto;display:flex;white-space:nowrap;overflow-x:auto;max-height:none;gap:13px;padding:0 0 13px;margin-bottom:24px;border-bottom:1px solid var(--ink)}
+html[data-view-mode=mobile] .topic-sidebar .sidebar-label{display:none}
+html[data-view-mode=mobile] .topic-sidebar a{flex-shrink:0;font-size:11px;padding:7px 0}
+html[data-view-mode=mobile] .topic-sidebar .back-chapter{margin:0;border:0;padding:7px 0}
+html[data-view-mode=mobile] .topic-sidebar.lesson-sidebar{display:none}
+html[data-view-mode=mobile] .chapter-intro h1{font-size:31px}
+html[data-view-mode=mobile] .lesson-article h1{font-size:30px}
+html[data-view-mode=mobile] .lesson-body{font-size:16px}
+html[data-view-mode=mobile] .lesson-row{grid-template-columns:35px 1fr 20px}
+html[data-view-mode=mobile] .lesson-row h3{font-size:17px}
+html[data-view-mode=mobile] .lesson-visual svg{min-width:440px}
+html[data-view-mode=mobile] .lab-workspace{grid-template-columns:1fr}
+html[data-view-mode=mobile] .lab-controls{border-right:0;border-bottom:1px solid var(--line);grid-template-columns:1fr;padding:20px}
+html[data-view-mode=mobile] .lab-output{padding:20px;min-width:0}
+html[data-view-mode=mobile] .metrics{min-width:0}
+html[data-view-mode=mobile] .metric strong{font-size:20px}
+html[data-view-mode=mobile] .read-next{grid-template-columns:1fr}
+html[data-view-mode=mobile] .dictionary-tools{grid-template-columns:1fr}
+html[data-view-mode=mobile] .lab-card .lab-preview{height:150px}
+html[data-view-mode=mobile] .lab-card-content{padding:20px}
+}
+@media(max-width:760px){
+.view-switch{display:none}
+.lab-controls{grid-template-columns:1fr}
+.lab-controls h2,.lab-instruction{grid-column:1}
+.lab-output{min-width:0}
+.hero{padding-bottom:30px}
+.section-heading{align-items:flex-start}
+}
+@media print{.view-switch{display:none!important}}
